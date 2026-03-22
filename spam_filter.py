@@ -63,24 +63,15 @@ class NaiveBayesClassifier:
         prob_if_spam = prob_spam
         prob_if_ham = prob_ham
         
-        vocab_size = len(self.vocabulary)
-        
-        # Display the math to the user so they can see the formula at work!
-        print(f"\n[Math] P(Spam) Prior: {prob_spam:.2f} | P(Ham) Prior: {prob_ham:.2f}")
-        
         for word in words:
-            # P(Word | Class) 
-            # Apply Laplace (Add-1) Smoothing so probability never equals exactly 0
-            word_spam_prob = (self.spam_word_counts[word] + 1) / (self.spam_total_words + vocab_size)
-            word_ham_prob = (self.ham_word_counts[word] + 1) / (self.ham_total_words + vocab_size)
+            # P(Word | Class) without Laplace Smoothing
+            # If word is unseen in the class, probability becomes 0
+            word_spam_prob = self.spam_word_counts[word] / self.spam_total_words if self.spam_total_words > 0 else 0
+            word_ham_prob = self.ham_word_counts[word] / self.ham_total_words if self.ham_total_words > 0 else 0
             
             # The core of Naive Bayes: Multiplying the probabilities together
             prob_if_spam *= word_spam_prob
             prob_if_ham *= word_ham_prob
-            
-            print(f"[Math] - Word: '{word:12s}' | P({word}|Spam) = {word_spam_prob:.6f} | P({word}|Ham) = {word_ham_prob:.6f}")
-            
-        print(f"[Math] OVERALL SCORE -> Prob(Spam|Text): {prob_if_spam:.10f} vs Prob(Ham|Text): {prob_if_ham:.10f}")
             
         return 'spam' if prob_if_spam > prob_if_ham else 'ham'
 

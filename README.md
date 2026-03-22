@@ -5,8 +5,6 @@ This is a ground-up implementation of a Naive Bayes classifier built entirely fr
 ## Features
 - **From Scratch Implementation**: The classifier is built and trained internally using only standard Python libraries (`math`, `re`, `collections`, `tkinter`).
 - **Interactive UI**: Includes a clean and simple graphical interface to type messages and instantly classify them as "Spam 🚨" or "Ham ✅".
-- **Laplace Smoothing**: Implements Add-1 smoothing to prevent zero-probability errors when the model evaluates previously unseen words.
-- **Math Visualization**: While the UI shows the final user-friendly result, the console/terminal outputs the step-by-step mathematical probability calculations for educational purposes.
 
 ## How it works
 1. **Tokenization**: It splits input sentences into words and normalizes them to lowercase.
@@ -17,5 +15,5 @@ This is a ground-up implementation of a Naive Bayes classifier built entirely fr
 Ensure you have Python installed on your system. Navigate to this directory and run the following command:
 
 ```bash
-python spam_filter_ui.py
+python spam_filter.py
 ```
