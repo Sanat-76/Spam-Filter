@@ -63,11 +63,14 @@ class NaiveBayesClassifier:
         prob_if_spam = prob_spam
         prob_if_ham = prob_ham
         
+        vocab_size = len(self.vocabulary)
+        
         for word in words:
-            # P(Word | Class) without Laplace Smoothing
-            # If word is unseen in the class, probability becomes 0
-            word_spam_prob = self.spam_word_counts[word] / self.spam_total_words if self.spam_total_words > 0 else 0
-            word_ham_prob = self.ham_word_counts[word] / self.ham_total_words if self.ham_total_words > 0 else 0
+            # P(Word | Class) with Laplace Smoothing (alpha = 1)
+            # Formula: (count(word, class) + 1) / (total_words_in_class + |V|)
+            # This prevents zero probabilities for unseen words
+            word_spam_prob = (self.spam_word_counts[word] + 1) / (self.spam_total_words + vocab_size) if self.spam_total_words > 0 else 0
+            word_ham_prob = (self.ham_word_counts[word] + 1) / (self.ham_total_words + vocab_size) if self.ham_total_words > 0 else 0
             
             # The core of Naive Bayes: Multiplying the probabilities together
             prob_if_spam *= word_spam_prob
