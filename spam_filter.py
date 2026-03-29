@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-import math
 from collections import defaultdict
 import re
+from training_data import get_training_data
 
 class NaiveBayesClassifier:
     def __init__(self):
@@ -78,32 +78,7 @@ class NaiveBayesClassifier:
             
         return 'spam' if prob_if_spam > prob_if_ham else 'ham'
 
-def get_training_data():
-    return [
-        # Spam examples
-        ("Win free cash now", "spam"),
-        ("Get a free gift waiting for you", "spam"),
-        ("Click here for free money", "spam"),
-        ("Buy our product now cheap", "spam"),
-        ("Congratulations! You won the lottery", "spam"),
-        ("Urgent: Your account has been compromised, click here to verify", "spam"),
-        ("Claim your $1000 Walmart gift card!", "spam"),
-        ("You have been selected for a special exclusive offer", "spam"),
-        ("Earn money working from home easy", "spam"),
-        ("Limited time offer: get 50% off all purchases", "spam"),
-        
-        # Ham examples
-        ("Hello friend how are you", "ham"),
-        ("Meeting at 10 am tomorrow", "ham"),
-        ("Can you send the report", "ham"),
-        ("Let's grab lunch today", "ham"),
-        ("Are we still on for the meeting?", "ham"),
-        ("Don't forget to pick up groceries", "ham"),
-        ("Here is the requested document for review", "ham"),
-        ("Did you watch the game last night?", "ham"),
-        ("Let me know when you are available for a quick chat", "ham"),
-        ("The project deadline has been extended to Friday", "ham")
-    ]
+
 
 class SpamFilterApp:
     def __init__(self, root):
